@@ -1,12 +1,12 @@
 import React from 'react';
 import Navbar from '../03.Components/Navbar';
-import Hero from '../02.Sections/Event';
+import Event from '../02.Sections/Event';
 
 const HomePage = () => {
     return (
-        <div classname="h-full w-full max-w-7xl p-6 flex flex-col gap-40">
+        <div classname="homepage">
             <Navbar />
-            <Hero />
+            <Event />
         </div>
     );
 };

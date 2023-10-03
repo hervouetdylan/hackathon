@@ -1,15 +1,8 @@
-var express = require('express')
-  , http = require('http')
-  , bodyParser = require('body-parser')
-  , app = express()
-  , http_port = 3000;
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
 
-app.use(express.static(__dirname + '/public.src'));
-app.use(bodyParser());
+const app = require('./public.src/js/App.js');
 
-app.get("/hello", function(req, res) {
-  res.send("<h1>Hello</h1>");
-});
-
-app.listen(http_port);
-console.log("Listening on " + http_port);
+app.listen(process.env.APP_PORT || 3000,  () => {
+    console.log(`App running on port ${process.env.PORT}...`);
+})

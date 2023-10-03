@@ -22,7 +22,7 @@ USE `mydbhackathonnod` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydbhackathonnod`.`user` (
   `iduser` INT NOT NULL,
-  `pseudo` VARCHAR(45) NOT NULL,
+  `pseudo` VARCHAR(45) UNIQUE NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(45) NOT NULL,

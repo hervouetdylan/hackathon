@@ -2,6 +2,7 @@ const app = require('app')
 const bodyParser = require('body-parser');
 
 
+
 app.get('/posts', (req, res) => {
     const id = req.body.id; 
 });

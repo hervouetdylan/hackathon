@@ -2,28 +2,27 @@ const express = require("express");
 const router = express.Router();
 
 
-const postersController = require("../02.controllers/posters.controller");
-const colorsController = require("../02.controllers/colors.controller");
+const userController = require("../02.controllers/user.controller");
+const placeController = require("../02.controllers/place.controller")
+
+
+/* ------------------------------------------------------------------------
+Routes User
+------------------------------------------------------------------------- */
+
+router.get("/user", userController.getAllUser)
+router.post("/user", userController.createOneUser)
+router.put("/user/:userId", userController.updateOneUser)
+router.delete("/posters/:userId", userController.deleteOneUser)
+
 
 
 
 /* ------------------------------------------------------------------------
-Routes Posters
+Routes place
 ------------------------------------------------------------------------- */
 
-router.get("/posters", postersController.getAllPosters)
-router.post("/posters", postersController.createOnePoster)
-router.put("/posters/:postersId", postersController.updateOnePoster)
-router.delete("/posters/:postersId", postersController.deleteOnePoster)
-
-
-
-
-/* ------------------------------------------------------------------------
-Routes colors
-------------------------------------------------------------------------- */
-
-router.get("/colors", colorsController.getAllColors)
+router.get("/place", placeController.getAllPLace)
 
 
 module.exports = router

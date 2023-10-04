@@ -68,7 +68,7 @@ const Signin = () => {
                     <input type="password" name="password" placeholder='Password' style={styles.input} />
                 </div>
                 <div>
-                    <Link to="/">
+                    <Link to="/home">
                         <button type='submit' style={styles.button}>Connexion</button>
                     </Link>
                 </div>

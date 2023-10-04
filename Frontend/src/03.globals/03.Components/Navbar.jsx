@@ -55,7 +55,7 @@ const Navbar = () => {
     return (
         <div style={styles.navbar}>
             <img style={styles.img} src={Logo} alt="logo de ynov nantes campus" />
-            <Link to={"/"}>
+            <Link to={"/home"}>
                 <h1 style={styles.titre}>Yevent</h1>
             </Link>
             <div style={styles.buttonContainer}>

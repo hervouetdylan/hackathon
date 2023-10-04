@@ -17,9 +17,10 @@ const Signin = () => {
         form: {
             backgroundColor: 'white',
             padding: '20px',
-            borderRadius: '5px',
+            borderRadius: '10px', // Ajustement de la taille du formulaire
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
             textAlign: 'center', // Centrer le texte à l'intérieur du formulaire
+            width: '300px', // Largeur du formulaire
         },
 
         input: {
@@ -27,6 +28,7 @@ const Signin = () => {
             border: '1px solid #000',
             height: '30px',
             margin: '10px 0',
+            width: '100%', // Largeur à 100% pour occuper toute la largeur du formulaire
         },
 
         label: {

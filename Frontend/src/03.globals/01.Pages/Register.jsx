@@ -39,7 +39,7 @@ const Register = () => {
         buttonContainer: {
             display: 'flex',
             justifyContent: 'center', // Centrer le bouton horizontalement
-            marginTop: '20px', // Espacement entre le dernier input et le bouton
+            marginTop: '15px', // Espacement entre le dernier input et le bouton
         },
 
         button: {
@@ -47,9 +47,9 @@ const Register = () => {
             color: 'white',
             border: 'none',
             borderRadius: '10px',
-            height: '60px',
+            height: '40px',
             cursor: 'pointer',
-            width: '50%', // Largeur à 50% pour centrer le bouton dans le formulaire
+            width: '185px', // Largeur à 50% pour centrer le bouton dans le formulaire
         },
     };
  

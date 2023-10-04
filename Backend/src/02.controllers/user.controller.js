@@ -4,10 +4,10 @@ const database = require("../../database")
 // Create 
 
 const createOneUser = (req, res) => {
-    const { pseudo,password,name,lastname } = req.body;
+    const { pseudo,password } = req.body;
 
     database
-        .query('INSERT INTO user (pseudo, password, name, lastname) VALUES (?, ?, ?, ?)', [pseudo, password,name,lastname])
+        .query('INSERT INTO user (pseudo, password) VALUES (?, ?)', [pseudo, password])
         .then(() => {res.status(201).send("User created")})
         .catch((err) =>{ res.status(500).send("Error creating a new user", err)})
 }
@@ -28,10 +28,10 @@ const getAllUser = (req, res) => {
 
 const updateOneUser = (req, res) => {
     const userId = Number(req.params.userId); 
-    const { pseudo, password, name, lastname } = req.body;
+    const { pseudo, password} = req.body;
 
     database
-        .query('UPDATE user SET pseudo = ?, password = ?, name = ?, lastname = ? WHERE iduser = ?', [pseudo, password, name, lastname, userId]) 
+        .query('UPDATE user SET pseudo = ?, password = ?, name = ?, lastname = ? WHERE iduser = ?', [pseudo, password, userId]) 
         .then(() =>{ res.send("User updated")})
         .catch((err) => {res.status(500).send("Error updating user", err)}) 
 }
@@ -48,6 +48,24 @@ const deleteOneUser = (req, res) => {
         .catch((err) =>{ res.status(500).send("Error deleting user", err)}) 
 }
 
+const getLogin = (req, res) => {
+    const { pseudo, password } = req.body;
+  
+    database
+      .query("SELECT * FROM user WHERE pseudo = ? AND password = ? ", [pseudo,password])
+      .then(([users]) => {
+        if (users[0] != null) {
+          res.user = users[0];
+          res.status(200).send(users)
+        } else {
+          res.sendStatus(401);
+        }
+      })
+      .catch(() => {
+        res.status(500).send("Connexion failed");
+      });
+  };
+  
 
 
 module.exports = {
@@ -55,4 +73,5 @@ module.exports = {
     getAllUser,
     updateOneUser,
     deleteOneUser,
+    getLogin
 }

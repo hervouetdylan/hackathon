@@ -1,21 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Logo from'../01.assets/img/download.png';
 
-const Register = () => {
+const Signin = () => {
     return (
-        <form>
+        <>
+        <img src={Logo} alt="Logo de l'école" />
+        <form className='form'>
             <div className='group'>
                 <label htmlFor='login'>Identifiant</label>
-                <input type="text" name="name" />
+                <input type="text" name="name" placeholder='Identifiant'/>
             </div>
             <div className='group'>
                 <label htmlFor='password'>Mot de passe</label>
-                <input type="text" name="password" />
+                <input type="text" name="password" placeholder='password'/>
             </div>
             <div className='group'>
-                <button type='submit'>Connexion</button>
+                <Link to="/">
+                    <button type='submit'>Connexion</button>
+                </Link>
             </div>
         </form>
+        </>
     );
 };
 
-export default Register;
+export default Signin;

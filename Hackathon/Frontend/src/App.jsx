@@ -5,7 +5,7 @@ function App() {
 
 
   return (
-    <div className="bg-stone-200 h-screen flex justify-center items-center flex-col gap-5">
+    <div className="test">
       <Router />
     </div>
   )

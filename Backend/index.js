@@ -7,7 +7,7 @@ const app = express()
 const port = parseInt(process.env.APP_PORT ?? "6000", 10);
 
 app.use(express.json())
-const cors = require("cors");
+
 
 app.use(
   cors({

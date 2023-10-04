@@ -3,9 +3,9 @@ const mysql = require('mysql2/promise'); // ou la bibliothèque de base de donn�
 async function testDatabaseConnection() {
   const connection = await mysql.createConnection({
     host: 'localhost', // Remplacez par l'hôte de votre base de données
-    user: 'votre_utilisateur', // Remplacez par votre nom d'utilisateur
-    password: 'votre_mot_de_passe', // Remplacez par votre mot de passe
-    database: 'votre_base_de_données', // Remplacez par le nom de votre base de données
+    user: 'root', // Remplacez par votre nom d'utilisateur
+    password: 'Nicol@s2002', // Remplacez par votre mot de passe
+    database: 'mydbhackathon', // Remplacez par le nom de votre base de données
   });
 
   try {

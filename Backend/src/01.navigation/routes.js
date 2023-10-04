@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const posterController = require("../02.controllers/posters.controller")
 const userController = require("../02.controllers/user.controller");
 const placeController = require("../02.controllers/place.controller")
 const categoryController = require("../02.controllers/category.controller")

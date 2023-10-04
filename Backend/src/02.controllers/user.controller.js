@@ -7,7 +7,7 @@ const createOneUser = (req, res) => {
     const { pseudo,password } = req.body;
 
     database
-        .query('INSERT INTO user (pseudo, password, name, lastname) VALUES (?, ?)', [pseudo, password])
+        .query('INSERT INTO user (pseudo, password) VALUES (?, ?)', [pseudo, password])
         .then(() => {res.status(201).send("User created")})
         .catch((err) =>{ res.status(500).send("Error creating a new user", err)})
 }

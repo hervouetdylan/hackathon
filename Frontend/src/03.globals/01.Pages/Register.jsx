@@ -59,7 +59,7 @@ const Register = () => {
     const [error, setError] = useState(true);
 
     const navigate = useNavigate();
-
+    console.log(dataPseudo);
     useEffect(() => {
         axios
           .get(`http://localhost:3000/user`)
@@ -94,6 +94,7 @@ const Register = () => {
                 <div>
                     <label style={styles.label} htmlFor='login'>Identifiant</label>
                     <input type="text" name="name" placeholder='Identifiant' onChange={(event) => setPseudo(event.target.value)} style={styles.input} />
+                    {error ? "" : <label className='text-red-700' htmlFor="">Pseudo déjà utiliser</label>}
                 </div>
                 <div>
                     <label style={styles.label} htmlFor='password'>Password</label>
@@ -102,6 +103,7 @@ const Register = () => {
                 <div>
                     <label style={styles.label} htmlFor='password'>Confirm password</label>
                     <input type="password" name="password" placeholder='Confirm password' style={styles.input} />
+                    {errorMdp ? "" : <label className='text-red-700' htmlFor="">Error password</label>}
                 </div>
                 <div style={styles.buttonContainer}>
                     

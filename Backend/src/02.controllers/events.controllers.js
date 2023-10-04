@@ -18,7 +18,7 @@ const createOneEvent = async (req, res) => {
 
 //Read all events
 
-const getAllevents = (req, res) => {
+const getAllEvents = (req, res) => {
 
         database 
             .query("SELECT * FROM event")
@@ -53,6 +53,6 @@ const deleteOneEvent = (req, res) => {
 module.exports = { 
     createOneEvent,
     updateOneEvent,
-    getAllevents,
+    getAllEvents,
     deleteOneEvent,
 }

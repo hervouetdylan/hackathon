@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 
 const postersController = require("../02.controllers/posters.controller");
-const colorsController = require("../02.controllers/colors.controller");
+const eventsController = require("../02.controllers/events.controllers")
 
 
 
@@ -20,10 +20,10 @@ router.delete("/posters/:postersId", postersController.deleteOnePoster)
 
 
 /* ------------------------------------------------------------------------
-Routes colors
-------------------------------------------------------------------------- */
+Routes events
+--------------------------------------  ----------------------------------- */
 
-router.get("/colors", colorsController.getAllColors)
+router.post("/events", eventsController.createOneEvent)
 
 
-module.exports = router
+module.exports = router;

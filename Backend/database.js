@@ -1,4 +1,3 @@
-require("dotenv").config();
 const mysql = require("mysql2/promise");
 
 const database = mysql.createPool({
@@ -12,9 +11,18 @@ const database = mysql.createPool({
 
 database
   .getConnection()
-  .then(() => {
-    console.info("Can reach database");
+  .then((connection) => {
+    console.info("Connected to the database");
+
+    // Exemple d'utilisation d'une requête SQL
+    const sql = "SELECT * FROM votre_table";
+    return connection.query(sql);
   })
-  .catch((err) => console.error(err));
+  .then(([rows, fields]) => {
+    console.info("Fetched data from the database", rows);
+  })
+  .catch((err) => {
+    console.error("Error connecting to the database:", err);
+  });
 
 module.exports = database;

@@ -9,7 +9,7 @@ function Router() {
             
             
             
-            // redirection automatique si la page n'existe pas
+            {/* Redirection automatique si la page n'existe pas*/}
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     )

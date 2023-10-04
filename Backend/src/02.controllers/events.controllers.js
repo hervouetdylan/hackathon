@@ -2,14 +2,18 @@ const database = require("../../database")
 
 //Create an event
 
-const createOneEvent = (req, res) => {
-    const {name, date, description, image} = req.body;
-
-    database
-        .query('INSERT INTO event (name, date, description, image) VALUES (?, ?, ?, ?)', [name, date, description, image])
-        .then(() => res.status(201).send("Event created"))
-        .catch((err) => res.status(500).send("Error creating a new event", err))
+const createOneEvent = async (req, res) => {
+    
+    try {
+        const { name, date, description, image } = req.body;
+        await database.query('INSERT INTO event (name, date, description, image) VALUES (?, ?, ?, ?)', [name, date, description, image]);
+        res.status(201).send("Event created");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error creating a new event");
+    }
 }
+
 
 
 //Read all events

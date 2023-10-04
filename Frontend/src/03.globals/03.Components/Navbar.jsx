@@ -9,45 +9,56 @@ const Navbar = () => {
             top: '0',
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center', // Ajout pour centrer verticalement
-            width: '100%', // Ajout pour occuper toute la largeur
-            backgroundColor: 'white', // Ajout pour couleur de fond
-            padding: '10px', // Ajout pour espacement intérieur
+            alignItems: 'center',
+            width: '100%',
+            padding: '10px',
+            backgroundColor: 'grey',
         },
 
         img: {
             width: '100px',
-            height: '20px', // Correction ici
+            height: '50px',
         },
 
         titre: {
-            color: 'blue',
+            color: 'white',
+            margin: '0', 
+            fontSize: '24px', 
+            textAlign: 'center', 
+            flex: '1',
         },
 
-        button: {
-            display: 'flex', // Ajout pour aligner les boutons horizontalement
+        buttonContainer: {
+            display: 'flex',
+            alignItems: 'center',
         },
 
         connexion: {
-            backgroundColor: '#247BA0',
-            borderRadius: '5%',
-            margin: '0 10px', // Ajout pour espacement horizontal entre les boutons
-            color: 'white', // Ajout pour couleur du texte
+            backgroundColor: 'black',
+            borderRadius: '15px',
+            margin: '0 10px',
+            color: 'white',
+            padding: '10px 20px', // Ajustez la largeur et la hauteur ici
+            textDecoration: 'none',
         },
 
         inscription: {
-            backgroundColor: '#247BA0',
-            borderRadius: '5%',
-            margin: '0 10px', // Ajout pour espacement horizontal entre les boutons
-            color: 'white', // Ajout pour couleur du texte
+            backgroundColor: 'white',
+            borderRadius: '15px',
+            margin: '0 10px',
+            color: 'black',
+            padding: '10px 20px', // Ajustez la largeur et la hauteur ici
+            textDecoration: 'none',
         },
     };
 
     return (
         <div style={styles.navbar}>
             <img style={styles.img} src={Logo} alt="logo de ynov nantes campus" />
-            <h1 style={styles.titre}>Yevent</h1>
-            <div style={styles.button}>
+            <Link to={"/home"}>
+                <h1 style={styles.titre}>Yevent</h1>
+            </Link>
+            <div style={styles.buttonContainer}>
                 <Link to="/connexion">
                     <button style={styles.connexion}>Connexion</button>
                 </Link>

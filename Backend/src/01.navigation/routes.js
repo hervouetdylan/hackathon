@@ -21,7 +21,10 @@ router.get("/place", placeController.getAllPLace)
 Routes events
 --------------------------------------  ----------------------------------- */
 
-router.post("/events", eventsController.createOneEvent)
-
+router.post("/event", eventsController.createOneEvent)
+router.put("/events/:eventId", eventsController.updateOneEvent)
+router.delete("/events/:eventId", eventsController.deleteOneEvent)
+router.get("/event", eventsController.getAllEvents)
 
 module.exports = router;
+    

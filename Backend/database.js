@@ -10,19 +10,10 @@ const database = mysql.createPool({
 });
 
 database
-  .getConnection()
-  .then((connection) => {
-    console.info("Connected to the database");
-
-    // Exemple d'utilisation d'une requête SQL
-    const sql = "SELECT * FROM votre_table";
-    return connection.query(sql);
-  })
-  .then(([rows, fields]) => {
-    console.info("Fetched data from the database", rows);
-  })
-  .catch((err) => {
-    console.error("Error connecting to the database:", err);
-  });
+.getConnection()
+.then(() => {
+  console.info("Can reach database");
+})
+.catch((err) => console.error(err));
 
 module.exports = database;

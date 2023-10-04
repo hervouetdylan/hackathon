@@ -6,22 +6,12 @@ const Post = () => {
     const [content, setContent] = useState('');
     const [responseMessage, setResponseMessage] = useState('');
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        try {
-            if (!title || !content) {
-                setResponseMessage('Veuillez remplir tous les champs.');
-                return;
-            }
-
-            const response = await axios.post('http://localhost:3306/events', { title, content });
-            console.log(response.data);
-            setResponseMessage('Post envoyé avec succès.');
-        } catch (error) {
-            console.error(error);
-            setResponseMessage('Erreur lors de l\'envoi du post.');
-        }
+        return axios 
+        .post('http://localhost:3000/event', {content, title, description})
+        .then((res) =>console.log(res))
+        .catch((err) => console.log(err));
     };
 
     return (

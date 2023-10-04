@@ -38,7 +38,7 @@ const Register = () => {
         buttonContainer: {
             display: 'flex',
             justifyContent: 'center', // Centrer le bouton horizontalement
-            marginTop: '20px', // Espacement entre le dernier input et le bouton
+            marginTop: '15px', // Espacement entre le dernier input et le bouton
         },
 
         button: {
@@ -46,9 +46,9 @@ const Register = () => {
             color: 'white',
             border: 'none',
             borderRadius: '10px',
-            height: '60px',
+            height: '40px',
             cursor: 'pointer',
-            width: '50%', // Largeur à 50% pour centrer le bouton dans le formulaire
+            width: '185px', // Largeur à 50% pour centrer le bouton dans le formulaire
         },
     };
 
@@ -58,21 +58,21 @@ const Register = () => {
                 <img src={Logo} alt="Logo de l'école" />
                 <h1>Create Account</h1>
                 <div>
-                    <label style={styles.label} htmlFor='login'>Identifiant</label>
+                    
                     <input type="text" name="name" placeholder='Identifiant' style={styles.input} />
                 </div>
                 <div>
-                    <label style={styles.label} htmlFor='password'>Password</label>
+                    
                     <input type="password" name="password" placeholder='Password' style={styles.input} />
                 </div>
                 <div>
-                    <label style={styles.label} htmlFor='password'>Confirm password</label>
+                    
                     <input type="password" name="password" placeholder='Confirm password' style={styles.input} />
                 </div>
                 <div style={styles.buttonContainer}>
                     <Link to="/connexion">
                         <button type='submit' style={styles.button}>Inscription</button>
-                    </Link>
+                    </Link>    
                 </div>
             </form>
         </div>

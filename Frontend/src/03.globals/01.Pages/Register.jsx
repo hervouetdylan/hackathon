@@ -58,7 +58,6 @@ const Register = () => {
                 <img src={Logo} alt="Logo de l'école" />
                 <h1>Create Account</h1>
                 <div>
-                    
                     <input type="text" name="name" placeholder='Identifiant' style={styles.input} />
                 </div>
                 <div>

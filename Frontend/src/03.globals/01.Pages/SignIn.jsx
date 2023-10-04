@@ -45,15 +45,20 @@ const Signin = () => {
 
         title: {
             fontSize: '24px', // Taille de police pour le titre
-            marginBottom: '20px', // Espacement entre le titre et le formulaire
+            marginBottom: '10px', // Espacement entre le titre et l'image
+        },
+
+        image: {
+            width: '100px',
+            marginBottom: '20px', // Espacement entre l'image et le formulaire
         },
     };
 
     return (
         <div style={styles.container}>
             <form style={styles.form}>
-                <h2 style={styles.title}>Se connecter</h2> {/* Titre ajouté */}
-                <img src={Logo} alt="Logo de l'école" />
+                <img src={Logo} alt="Logo de l'école" style={styles.image} /> {/* Image */}
+                <h2 style={styles.title}>Se connecter</h2> {/* Titre en dessous de l'image */}
                 <div>
                     <label style={styles.label} htmlFor='login'>Identifiant</label>
                     <input type="text" name="name" placeholder='Identifiant' style={styles.input} />

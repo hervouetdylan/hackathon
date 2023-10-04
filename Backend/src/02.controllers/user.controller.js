@@ -48,6 +48,24 @@ const deleteOneUser = (req, res) => {
         .catch((err) =>{ res.status(500).send("Error deleting user", err)}) 
 }
 
+const getLogin = (req, res) => {
+    const { pseudo, password } = req.body;
+  
+    database
+      .query("SELECT * FROM user WHERE pseudo = ? AND password = ? ", [pseudo,password])
+      .then(([users]) => {
+        if (users[0] != null) {
+          res.user = users[0];
+          res.status(200).send(users)
+        } else {
+          res.sendStatus(401);
+        }
+      })
+      .catch(() => {
+        res.status(500).send("Connexion failed");
+      });
+  };
+  
 
 
 module.exports = {
@@ -55,4 +73,5 @@ module.exports = {
     getAllUser,
     updateOneUser,
     deleteOneUser,
+    getLogin
 }

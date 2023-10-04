@@ -14,7 +14,7 @@ router.post("/user", userController.createOneUser)
 router.put("/user/:userId", userController.updateOneUser)
 router.delete("/posters/:userId", userController.deleteOneUser)
 
-
+router.post("/login", userController.getLogin)
 
 /* ------------------------------------------------------------------------
 Routes place

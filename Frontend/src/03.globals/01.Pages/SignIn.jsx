@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../01.assets/img/download.png';
+import axios from "axios"
 
 const Signin = () => {
     const styles = {
@@ -53,24 +54,42 @@ const Signin = () => {
             marginBottom: '20px', // Espacement entre l'image et le formulaire
         },
     };
+    const [pseudo, setPseudo] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const handleSubmit = (inscription) => {
+        inscription.preventDefault();
+        console.log("coucou");
+         axios
+        .post(`http://localhost:3000/login`, {pseudo, password})
+        .then((res) => {
+
+            // setUserContext(res.data[0])
+            // console.log(userContext);
+            navigate("/");
+        })
+        .catch((err) => {
+            console.warn("retour err", err);
+        });
+    }
 
     return (
         <div style={styles.container}>
-            <form style={styles.form}>
+            <form onSubmit={handleSubmit} style={styles.form}>
                 <img src={Logo} alt="Logo de l'école" style={styles.image} /> {/* Image */}
                 <h2 style={styles.title}>Se connecter</h2> {/* Titre en dessous de l'image */}
                 <div>
                     <label style={styles.label} htmlFor='login'>Identifiant</label>
-                    <input type="text" name="name" placeholder='Identifiant' style={styles.input} />
+                    <input type="text" onChange={(event) => setPseudo(event.target.value)} name="name" placeholder='Identifiant' style={styles.input} />
                 </div>
                 <div>
                     <label style={styles.label} htmlFor='password'>Mot de passe</label>
-                    <input type="password" name="password" placeholder='Password' style={styles.input} />
+                    <input type="password" onChange={(event) => setPassword(event.target.value)} name="password" placeholder='Password' style={styles.input} />
                 </div>
                 <div>
-                    <Link to="/">
-                        <button type='submit' style={styles.button}>Connexion</button>
-                    </Link>
+                    
+                        <button  type='submit' onSubmit={handleSubmit} style={styles.button}>Connexion</button>
+                    
                 </div>
             </form>
         </div>

@@ -15,7 +15,8 @@ const Register = () => {
         form: {
             backgroundColor: 'white',
             display: 'flex',
-            flexDirection: 'column', // Utilisation de la disposition en colonne
+            flexDirection: 'column',
+            alignItems: 'center', // Centrer les éléments horizontalement
             padding: '20px',
             borderRadius: '10px',
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
@@ -26,11 +27,18 @@ const Register = () => {
             border: '1px solid #000',
             height: '30px',
             margin: '10px 0',
+            width: '100%', // Largeur à 100% pour occuper toute la largeur du formulaire
         },
 
         label: {
-            marginBottom: '5px', // Espacement entre le label et l'input
-            fontWeight: 'bold', // Optionnel : mise en gras du label
+            marginBottom: '5px',
+            fontWeight: 'bold',
+        },
+
+        buttonContainer: {
+            display: 'flex',
+            justifyContent: 'center', // Centrer le bouton horizontalement
+            marginTop: '20px', // Espacement entre le dernier input et le bouton
         },
 
         button: {
@@ -40,7 +48,7 @@ const Register = () => {
             borderRadius: '10px',
             height: '60px',
             cursor: 'pointer',
-            marginTop: '10px', // Espacement entre le dernier input et le bouton
+            width: '50%', // Largeur à 50% pour centrer le bouton dans le formulaire
         },
     };
 
@@ -61,9 +69,11 @@ const Register = () => {
                     <label style={styles.label} htmlFor='password'>Confirm password</label>
                     <input type="password" name="password" placeholder='Confirm password' style={styles.input} />
                 </div>
-                <Link to="/connexion">
-                    <button type='submit' style={styles.button}>Inscription</button>
-                </Link>
+                <div style={styles.buttonContainer}>
+                    <Link to="/connexion">
+                        <button type='submit' style={styles.button}>Inscription</button>
+                    </Link>
+                </div>
             </form>
         </div>
     );

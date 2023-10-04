@@ -52,14 +52,18 @@ const Register = () => {
             width: '50%', // Largeur à 50% pour centrer le bouton dans le formulaire
         },
     };
-
+ 
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
     const [dataPseudo, setDataPseudo] = useState();
+    const [confirmPassword,setConfirmPassword] = useState("")
     const [error, setError] = useState(true);
-
+    const [errorMdp, setErrorMdp] = useState(true);
     const navigate = useNavigate();
-    console.log(dataPseudo);
+    
+
+
+
     useEffect(() => {
         axios
           .get(`http://localhost:3000/user`)
@@ -75,9 +79,13 @@ const Register = () => {
         const userExists = dataPseudo.find(
             (data) => data.pseudo.toLowerCase() === pseudo.toLowerCase()
           );
-      
+        const passwordError = password !== confirmPassword
+
           if (userExists) {
-            return setError(false);
+            return setError(false);}
+
+          if (passwordError) {
+            return setErrorMdp(false), setError(true);
           }
         return axios
         .post(`http://localhost:3000/user`, {pseudo : pseudo,password: password })
@@ -93,16 +101,16 @@ const Register = () => {
                 <h1>Create Account</h1>
                 <div>
                     <label style={styles.label} htmlFor='login'>Identifiant</label>
-                    <input type="text" name="name" placeholder='Identifiant' onChange={(event) => setPseudo(event.target.value)} style={styles.input} />
+                    <input required type="text" name="name" placeholder='Identifiant' onChange={(event) => setPseudo(event.target.value)} style={styles.input} />
                     {error ? "" : <label className='text-red-700' htmlFor="">Pseudo déjà utiliser</label>}
                 </div>
                 <div>
-                    <label style={styles.label} htmlFor='password'>Password</label>
-                    <input type="password" name="password" placeholder='Password' onChange={(event) => setPassword(event.target.value)} style={styles.input} />
+                    <label  style={styles.label} htmlFor='password'>Password</label>
+                    <input required type="password" name="password" placeholder='Password' onChange={(event) => setPassword(event.target.value)} style={styles.input} />
                 </div>
                 <div>
                     <label style={styles.label} htmlFor='password'>Confirm password</label>
-                    <input type="password" name="password" placeholder='Confirm password' style={styles.input} />
+                    <input required type="password" name="password" placeholder='Confirm password'onChange={(event) => setConfirmPassword(event.target.value)} style={styles.input} />
                     {errorMdp ? "" : <label className='text-red-700' htmlFor="">Error password</label>}
                 </div>
                 <div style={styles.buttonContainer}>

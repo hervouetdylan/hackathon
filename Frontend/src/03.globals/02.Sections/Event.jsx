@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import AddEvent from "../01.Pages/AddEvent";
-import axios from 'axios';
 
-
-const Event = () => {
+const displayEvent = () => {
     const styles = {
         container: {
             marginTop: '70px',
@@ -140,4 +138,4 @@ const Event = () => {
     );
 }
 
-export default Event;
+export default displayEvent;

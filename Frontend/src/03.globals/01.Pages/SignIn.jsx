@@ -55,6 +55,10 @@ const Signin = () => {
             width: '100px',
             marginBottom: '20px', // Espacement entre l'image et le formulaire
         },
+
+        create: {
+            color: '#81b71a',
+        },
     };
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
@@ -88,6 +92,10 @@ const Signin = () => {
                     <label style={styles.label} htmlFor='password'>Mot de passe</label>
                     <input required type="password" onChange={(event) => setPassword(event.target.value)} name="password" placeholder='Password' style={styles.input} />
                 </div>
+                <p>Do not have an account yet ?</p>
+                <Link to="/inscription">
+                    <button type='submit' style={styles.create}>Create an account</button>
+                </Link>
                 <div>
                     
                         <button  type='submit' onSubmit={handleSubmit} style={styles.button}>Connexion</button>

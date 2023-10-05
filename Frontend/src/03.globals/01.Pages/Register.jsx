@@ -99,6 +99,7 @@ const Register = () => {
             <form onSubmit={handleSubmit} style={styles.form}>
                 <img src={Logo} alt="Logo de l'école" />
                 <h1>Create Account</h1>
+                
                 <div>
                     <label style={styles.label} htmlFor='login'>Identifiant</label>
                     <input required type="text" name="name" placeholder='Identifiant' onChange={(event) => setPseudo(event.target.value)} style={styles.input} />

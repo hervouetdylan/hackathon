@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import AddEvent from "../01.Pages/AddEvent";
-
+import axios from 'axios';
 const Event = () => {
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        // We retrieve the list of cards from the api
+        axios.get('http://localhost:3000/events')
+            .then((response) => {
+                setEvents(response.data) // update data in the state
+            })
+            .catch((err) => console.log(err))
+
+    }, []);
+    <div>
+        <ul>
+            {events.map((event) => (
+                <li>
+                    <li key={event.id}>
+                        <h2>{event.name}</h2>
+                        
+                        <p>{event.date}</p>
+
+                        <p>{event.description}</p>
+
+                        <img src={event.image} alt="event" />
+                    </li>
+                </li>
+            ))}
+        </ul>
+    </div>
     const styles = {
         container: {
             marginTop: '70px',

@@ -23,7 +23,7 @@ Routes events
 router.post("/events", eventsController.createOneEvent)
 router.put("/events/:eventId", eventsController.updateOneEvent)
 router.delete("/events/:eventId", eventsController.deleteOneEvent)
-router.get("events", eventsController.getAllEvents)
+router.get("/events", eventsController.getAllEvents)
 
 
 module.exports = router;

@@ -90,10 +90,10 @@ const displayEvent = () => {
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
-
+   
     useEffect (()=>{
         axios
-        .get(`http://localhost:3000/event`)
+        .get(`http://localhost:3000/events`)
         .then((res) => {setData(res.data) })
         axios
         .get(`http://localhost:3000/category`)
@@ -110,7 +110,7 @@ const displayEvent = () => {
         setEventPlace(value);
     }
 
-    console.log(eventPlace);
+   
     return (
         <div style={styles.container}>
             <div style={styles.header}>
@@ -118,13 +118,13 @@ const displayEvent = () => {
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
                         <option value="all">Tout voir</option>
                         {dataCategory.map((e)=>{
-                            return(<option value={e.idcategory}>{e.name_category}</option>)
+                            return(<option key={e.idcategory} value={e.idcategory}>{e.name_category}</option>)
                         })}
                     </select>
                     <select style={styles.select} onChange={(e) => handlePlaceChange(e.target.value)}>
                         <option value="all">Tout voir</option>
                         {dataPlace.map((e)=>{
-                            return(<option value={e.idplace}>{e.cardinal}</option>)
+                            return(<option key={e.idplace} value={e.idplace}>{e.cardinal}</option>)
                         })}
                     </select>
                 </div>
@@ -135,7 +135,7 @@ const displayEvent = () => {
             {data.filter((e) => eventCategory === "all" || e.id_category.toString() === eventCategory && eventPlace === "all" || e.id_place.toString() === eventPlace)
             .map((e)=>{
                 return(
-            <div className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>
+            <div key={e.idevent} className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>
                 <h1 className=' text-center text-xl' style={styles.title}>{e.name_event}</h1>
                 <div className='w-3/4 border-b border-black'></div>
                 <div className='w-4/5'>{e.description}</div>

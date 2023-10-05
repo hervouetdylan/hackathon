@@ -5,34 +5,6 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import AddEvent from "../01.Pages/AddEvent";
 import axios from 'axios';
 const Event = () => {
-    const [events, setEvents] = useState([]);
-
-    useEffect(() => {
-        // We retrieve the list of cards from the api
-        axios.get('http://localhost:3000/events')
-            .then((response) => {
-                setEvents(response.data) // update data in the state
-            })
-            .catch((err) => console.log(err))
-
-    }, []);
-    <div>
-        <ul>
-            {events.map((event) => (
-                <li>
-                    <li key={event.id}>
-                        <h2>{event.name}</h2>
-                        
-                        <p>{event.date}</p>
-
-                        <p>{event.description}</p>
-
-                        <img src={event.image} alt="event" />
-                    </li>
-                </li>
-            ))}
-        </ul>
-    </div>
     const styles = {
         container: {
             marginTop: '70px',
@@ -52,7 +24,7 @@ const Event = () => {
             width: '100%',
             marginBottom: '40px',
         },
-
+        
         filters: {
             display: 'flex',
             alignItems: 'center',
@@ -110,12 +82,23 @@ const Event = () => {
             alignItems: 'center',
         },
     };
+    const [events, setEvents] = useState([]);
 
+    
     const [likeCount, setLikeCount] = useState(0);
-
+    
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
+    useEffect(() => {
+        // We retrieve the list of cards from the api
+        axios.get('http://localhost:3000/events')
+            .then((response) => {
+                setEvents(response.data) // update data in the state
+            })
+            .catch((err) => console.log(err))
+
+    }, []);
 
     return (
         <div style={styles.container}>
@@ -143,6 +126,18 @@ const Event = () => {
             </div>
             <div style={styles.hautpost}>
                 <h1 style={styles.title}>Titre de l'événement</h1>
+                   <div>
+                        <ul>
+                            {events.map((event) => (
+                                <li key={event.id}>
+                                    <h2>{event.name}</h2>
+                                    <p>{event.date}</p>
+                                    <p>{event.description}</p>
+                                    <img src={event.image} alt="event" />
+                                </li>
+                            ))}
+                        </ul>
+                    </div> 
                 <div style={styles.counter}>
                     <button onClick={handleLikeClick} style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
                     <span> {likeCount}</span>

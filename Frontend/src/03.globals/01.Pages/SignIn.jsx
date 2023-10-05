@@ -82,11 +82,11 @@ const Signin = () => {
                 <h2 style={styles.title}>Se connecter</h2> {/* Titre en dessous de l'image */}
                 <div>
                     <label style={styles.label} htmlFor='login'>Identifiant</label>
-                    <input type="text" onChange={(event) => setPseudo(event.target.value)} name="name" placeholder='Identifiant' style={styles.input} />
+                    <input required type="text" onChange={(event) => setPseudo(event.target.value)} name="name" placeholder='Identifiant' style={styles.input} />
                 </div>
                 <div>
                     <label style={styles.label} htmlFor='password'>Mot de passe</label>
-                    <input type="password" onChange={(event) => setPassword(event.target.value)} name="password" placeholder='Password' style={styles.input} />
+                    <input required type="password" onChange={(event) => setPassword(event.target.value)} name="password" placeholder='Password' style={styles.input} />
                 </div>
                 <div>
                     

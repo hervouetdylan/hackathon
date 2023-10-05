@@ -5,11 +5,12 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import AddEvent from "../01.Pages/AddEvent";
 import axios from 'axios';
 
+
 const Event = () => {
     const styles = {
         container: {
             marginTop: '70px',
-            height: '100vh',
+            height: '100%',
             backgroundColor: 'lightgray',
             padding: '20px',
             display: 'flex',
@@ -84,6 +85,7 @@ const Event = () => {
     const [likeCount, setLikeCount] = useState(0);
     const [data, setData] = useState([])
     const [dataCategory, setDataCategory] = useState([])
+    const [dataPlace, setDataPlace] = useState([])
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
@@ -92,31 +94,30 @@ const Event = () => {
         axios
         .get(`http://localhost:3000/event`)
         .then((res) => {setData(res.data) })
-    },[])
-    useEffect (()=>{
         axios
         .get(`http://localhost:3000/category`)
         .then((res) => {setDataCategory(res.data) })
+        axios
+        .get(`http://localhost:3000/place`)
+        .then((res) => {setDataPlace(res.data) })
     },[])
+    console.log(dataPlace);
     
     return (
         <div style={styles.container}>
             <div style={styles.header}>
                 <div style={styles.filters}>
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="All">Toutes</option>
-                        <option value="Category A">Catégorie A</option>
-                        <option value="Category B">Catégorie B</option>
+                        <option value="all">Tout voir</option>
+                        {dataCategory.map((e)=>{
+                            return(<option>{e.name_category}</option>)
+                        })}
                     </select>
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="All">Toutes</option>
-                        <option value="Category A">Catégorie A</option>
-                        <option value="Category B">Catégorie B</option>
-                    </select>
-                    <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="All">Toutes</option>
-                        <option value="Category A">Catégorie A</option>
-                        <option value="Category B">Catégorie B</option>
+                        <option value="all">Tout voir</option>
+                        {dataPlace.map((e)=>{
+                            return(<option>{e.cardinal}</option>)
+                        })}
                     </select>
                 </div>
                 <Link to="/ajout-evenement">

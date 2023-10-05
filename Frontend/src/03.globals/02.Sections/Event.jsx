@@ -7,7 +7,7 @@ const displayEvent = () => {
     const styles = {
         container: {
             marginTop: '70px',
-            height: '100vh',
+            height: '100%',
             backgroundColor: 'lightgray',
             padding: '20px',
             display: 'flex',

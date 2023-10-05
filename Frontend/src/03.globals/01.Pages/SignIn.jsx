@@ -68,7 +68,7 @@ const Signin = () => {
 
             // setUserContext(res.data[0])
             // console.log(userContext);
-            navigate("/");
+            navigate("/home");
         })
         .catch((err) => {
             console.warn("retour err", err);

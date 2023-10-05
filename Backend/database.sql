@@ -114,7 +114,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydbhackathon`.`like` (
   `idlike` INT NOT NULL AUTO_INCREMENT,
-  `nb_like` INT NOT NULL,
+  `nb_like` TINYINT DEFAULT(0) NOT NULL,
   `idlike_iduser` INT NOT NULL,
   `idlike_idevent` INT NOT NULL,
   PRIMARY KEY (`idlike`),
@@ -148,7 +148,11 @@ INSERT INTO `mydbhackathon`.`place` (`cardinal`) VALUES ("Ouest");
 INSERT INTO `mydbhackathon`.`category` (`name_category`) VALUES ("Soirées");
 INSERT INTO `mydbhackathon`.`category` (`name_category`) VALUES ("Sport");
 INSERT INTO `mydbhackathon`.`category` (`name_category`) VALUES ("Culturel");
-INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51:14","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,1,1);
-INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51:14","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,2,2);
-INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51:14","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,3,1);
-INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51:14","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,4,3);
+INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,1,1);
+INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,2,2);
+INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,3,1);
+INSERT INTO `mydbhackathon`.`event` (`name_event`,`date`,`description`,`id_user`,`id_place`,`id_category`) VALUES ("Probitatem quis memoriam","2023-12-21 13:51","Meae optimi magis animadvertere Atratine dicendi Vellem refutaremus animadvertere id male more aliquanto adulescentis et admiratus hunc et partem licentiam ex male sum datam quidem debeo poteratis moderatur adulescentis sum.",1,4,3);
+
+INSERT INTO `mydbhackathon`.`like` (`nb_like`,`idlike_iduser`,`idlike_idevent`) VALUES (1,1,1);
+INSERT INTO `mydbhackathon`.`like` (`nb_like`,`idlike_iduser`,`idlike_idevent`) VALUES (0,1,2);
+INSERT INTO `mydbhackathon`.`like` (`nb_like`,`idlike_iduser`,`idlike_idevent`) VALUES (1,1,3);

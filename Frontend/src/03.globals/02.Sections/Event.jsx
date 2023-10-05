@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UserContext from "../04.Context/UserContext";
+
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
@@ -87,6 +89,8 @@ const displayEvent = () => {
     const [dataPlace, setDataPlace] = useState([])
     const [eventCategory, setEventCategory] = useState('all')
     const [eventPlace, setEventPlace] = useState('all')
+    const { userContext }= useContext(UserContext)
+    console.log(userContext);
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
@@ -116,15 +120,15 @@ const displayEvent = () => {
             <div style={styles.header}>
                 <div style={styles.filters}>
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="all">Tout voir</option>
+                        <option className='text-center' value="all">All</option>
                         {dataCategory.map((e)=>{
-                            return(<option key={e.idcategory} value={e.idcategory}>{e.name_category}</option>)
+                            return(<option className='text-center' key={e.idcategory} value={e.idcategory}>{e.name_category}</option>)
                         })}
                     </select>
                     <select style={styles.select} onChange={(e) => handlePlaceChange(e.target.value)}>
-                        <option value="all">Tout voir</option>
+                        <option className='text-center' value="all">All</option>
                         {dataPlace.map((e)=>{
-                            return(<option key={e.idplace} value={e.idplace}>{e.cardinal}</option>)
+                            return(<option className='text-center' key={e.idplace} value={e.idplace}>{e.cardinal}</option>)
                         })}
                     </select>
                 </div>

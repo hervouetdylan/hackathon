@@ -1,6 +1,7 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import Logo from '../01.assets/img/download.png';
+import UserContext from "../04.Context/UserContext";
 import axios from "axios"
 
 const Signin = () => {
@@ -63,6 +64,8 @@ const Signin = () => {
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const { userContext,setUserContext }= useContext(UserContext)
+
     const handleSubmit = (inscription) => {
         inscription.preventDefault();
         console.log("coucou");
@@ -70,8 +73,8 @@ const Signin = () => {
         .post(`http://localhost:3000/login`, {pseudo, password})
         .then((res) => {
 
-            // setUserContext(res.data[0])
-            // console.log(userContext);
+            setUserContext(res.data[0])
+            console.log(userContext);
             navigate("/home");
         })
         .catch((err) => {

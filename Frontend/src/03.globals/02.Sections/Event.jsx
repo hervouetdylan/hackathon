@@ -27,7 +27,7 @@ const displayEvent = () => {
             width: '100%',
             marginBottom: '40px',
         },
-
+        
         filters: {
             display: 'flex',
             alignItems: 'center',
@@ -82,7 +82,9 @@ const displayEvent = () => {
 
      
     };
+    const [events, setEvents] = useState([]);
 
+    
     const [likeCount, setLikeCount] = useState(0);
     const [data, setData] = useState([])
     const [dataCategory, setDataCategory] = useState([])

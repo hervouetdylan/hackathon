@@ -4,7 +4,7 @@ import Event from '../02.Sections/Event';
 
 const HomePage = () => {
     return (
-        <div classname="homepage">
+        <div className="h-full w-full max-w-7xl p-6 flex flex-col gap-40">
             <Navbar />
             <Event />
         </div>

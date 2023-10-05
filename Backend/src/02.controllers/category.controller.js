@@ -3,15 +3,17 @@ const database = require("../../database")
 
 // Read
 
-const getAllColors = (req, res) => {
+const getAllCategory = (req, res) => {
+
     database
-        .query("SELECT * FROM colors")
-        .then(([colors]) => res.json(colors))
+        .query("SELECT * FROM category")
+        .then(([user]) => res.json(user))
         .catch((err) => res.status(500).send("Error getting data from database", err))
 }
 
 
 
 module.exports = {
-    getAllColors,
+    getAllCategory,
+
 }

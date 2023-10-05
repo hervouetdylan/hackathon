@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useState,useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../01.assets/img/download.png';
+import axios from "axios"
 
 const Register = () => {
     const styles = {
@@ -51,28 +52,72 @@ const Register = () => {
             width: '185px', // Largeur à 50% pour centrer le bouton dans le formulaire
         },
     };
+ 
+    const [pseudo, setPseudo] = useState("");
+    const [password, setPassword] = useState("");
+    const [dataPseudo, setDataPseudo] = useState();
+    const [confirmPassword,setConfirmPassword] = useState("")
+    const [error, setError] = useState(true);
+    const [errorMdp, setErrorMdp] = useState(true);
+    const navigate = useNavigate();
+    
+
+
+
+    useEffect(() => {
+        axios
+          .get(`http://localhost:3000/user`)
+          .then((res) => {
+            setDataPseudo(res.data);
+          })
+          .catch((err) => console.error(err));
+      }, []);
+
+    const handleSubmit = (inscription) => {
+        inscription.preventDefault();
+
+        const userExists = dataPseudo.find(
+            (data) => data.pseudo.toLowerCase() === pseudo.toLowerCase()
+          );
+        const passwordError = password !== confirmPassword
+
+          if (userExists) {
+            return setError(false);}
+
+          if (passwordError) {
+            return setErrorMdp(false), setError(true);
+          }
+        return axios
+        .post(`http://localhost:3000/user`, {pseudo : pseudo,password: password })
+        .then((res)=>console.info(res), navigate("/connexion"))
+        .catch((err)=>{console.warn(err);})
+    }
+
 
     return (
         <div style={styles.container}>
-            <form style={styles.form}>
+            <form onSubmit={handleSubmit} style={styles.form}>
                 <img src={Logo} alt="Logo de l'école" />
                 <h1>Create Account</h1>
                 
                 <div>
-                    <input type="text" name="name" placeholder='Identifiant' style={styles.input} />
+                    <label style={styles.label} htmlFor='login'>Identifiant</label>
+                    <input required type="text" name="name" placeholder='Identifiant' onChange={(event) => setPseudo(event.target.value)} style={styles.input} />
+                    {error ? "" : <label className='text-red-700' htmlFor="">Pseudo déjà utiliser</label>}
                 </div>
                 <div>
-                    
-                    <input type="password" name="password" placeholder='Password' style={styles.input} />
+                    <label  style={styles.label} htmlFor='password'>Password</label>
+                    <input required type="password" name="password" placeholder='Password' onChange={(event) => setPassword(event.target.value)} style={styles.input} />
                 </div>
                 <div>
-                    
-                    <input type="password" name="password" placeholder='Confirm password' style={styles.input} />
+                    <label style={styles.label} htmlFor='password'>Confirm password</label>
+                    <input required type="password" name="password" placeholder='Confirm password'onChange={(event) => setConfirmPassword(event.target.value)} style={styles.input} />
+                    {errorMdp ? "" : <label className='text-red-700' htmlFor="">Error password</label>}
                 </div>
                 <div style={styles.buttonContainer}>
-                    <Link to="/connexion">
-                        <button type='submit' style={styles.button}>Inscription</button>
-                    </Link>    
+                    
+                        <button type='submit' onSubmit={handleSubmit} style={styles.button}>Inscription</button>
+                    
                 </div>
             </form>
         </div>

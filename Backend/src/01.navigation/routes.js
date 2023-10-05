@@ -1,29 +1,37 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-
-const postersController = require("../02.controllers/posters.controller");
-const colorsController = require("../02.controllers/colors.controller");
-
-
-
-/* ------------------------------------------------------------------------
-Routes Posters
-------------------------------------------------------------------------- */
-
-router.get("/posters", postersController.getAllPosters)
-router.post("/posters", postersController.createOnePoster)
-router.put("/posters/:postersId", postersController.updateOnePoster)
-router.delete("/posters/:postersId", postersController.deleteOnePoster)
-
-
-
+const userController = require("../02.controllers/user.controller");
+const placeController = require("../02.controllers/place.controller")
+const categoryController = require("../02.controllers/category.controller")
+const eventsController = require("../02.controllers/events.controllers")
 
 /* ------------------------------------------------------------------------
-Routes colors
+Routes user
+------------------------------------------------------------------------- */
+router.get("/user", userController.getAllUser)
+router.post("/login", userController.getLogin)
+router.post("/user", userController.createOneUser)
+router.put("/user", userController.updateOneUser)
+router.delete("/user", userController.deleteOneUser)
+/* ------------------------------------------------------------------------
+Routes category
+------------------------------------------------------------------------- */
+router.get("/category",categoryController.getAllCategory)
+/* ------------------------------------------------------------------------
+Routes place
 ------------------------------------------------------------------------- */
 
-router.get("/colors", colorsController.getAllColors)
+router.get("/place", placeController.getAllPLace)
 
+/* ------------------------------------------------------------------------
+Routes events
+--------------------------------------  ----------------------------------- */
 
-module.exports = router
+router.post("/event", eventsController.createOneEvent)
+router.put("/events/:eventId", eventsController.updateOneEvent)
+router.delete("/events/:eventId", eventsController.deleteOneEvent)
+router.get("/event", eventsController.getAllEvents)
+
+module.exports = router;
+    

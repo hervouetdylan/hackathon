@@ -12,7 +12,7 @@ function Router() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/ajout-evenement" element={<AddEvent />} />
             
-            // redirection automatique si la page n'existe pas
+            {/* Redirection automatique si la page n'existe pas*/}
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     )

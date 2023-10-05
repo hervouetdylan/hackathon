@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import AddEvent from "../01.Pages/AddEvent";
+import axios from 'axios';
 
 const displayEvent = () => {
     const styles = {
@@ -53,73 +55,87 @@ const displayEvent = () => {
             marginRight: '20px',
         },
 
-        hautpost: {
-            backgroundColor: 'white',
-            marginTop: '100px',
-            height: '300px',
-            width: '700px',
-            display: 'flex',
-            flexDirection: 'column', // Afficher le contenu en colonne
-            justifyContent: 'space-between', // Espacement vertical entre les éléments
-            alignItems: 'flex-start', // Aligner à gauche
-            padding: '20px', // Ajouter un espace intérieur
-            position: 'relative', // Permet de positionner le bouton Like
-        },
+        // hautpost: {
+        //     backgroundColor: 'white',
+        //     marginTop: '100px',
+        //     height: '300px',
+        //     width: '700px',
+        //     display: 'flex',
+        //     flexDirection: 'column', // Afficher le contenu en colonne
+        //     justifyContent: 'space-between', // Espacement vertical entre les éléments
+        //     alignItems: 'flex-start', // Aligner à gauche
+        //     padding: '20px', // Ajouter un espace intérieur
+        //     position: 'relative', // Permet de positionner le bouton Like
+        // },
 
-        title: {
-            fontSize: '24px',
-            marginBottom: '20px', // Espacement entre le titre et le bouton Like
-        },
+        // title: {
+        //     fontSize: '24px',
+        //     marginBottom: '20px', // Espacement entre le titre et le bouton Like
+        // },
 
-        likeButton: {
-            position: 'absolute',
-            top: '20px', // Position en haut
-            right: '20px', // Position à droite
-        },
+        // likeButton: {
+        //     position: 'absolute',
+        //     top: '20px', // Position en haut
+        //     right: '20px', // Position à droite
+        // },
 
-        counter: {
-            display: 'flex',
-            alignItems: 'center',
-        },
+     
     };
 
     const [likeCount, setLikeCount] = useState(0);
-
+    const [data, setData] = useState([])
+    const [dataCategory, setDataCategory] = useState([])
+    const [dataPlace, setDataPlace] = useState([])
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
 
+    useEffect (()=>{
+        axios
+        .get(`http://localhost:3000/event`)
+        .then((res) => {setData(res.data) })
+        axios
+        .get(`http://localhost:3000/category`)
+        .then((res) => {setDataCategory(res.data) })
+        axios
+        .get(`http://localhost:3000/place`)
+        .then((res) => {setDataPlace(res.data) })
+    },[])
+    console.log(dataPlace);
+    
     return (
         <div style={styles.container}>
             <div style={styles.header}>
                 <div style={styles.filters}>
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="All">Toutes</option>
-                        <option value="Category A">Catégorie A</option>
-                        <option value="Category B">Catégorie B</option>
+                        <option value="all">Tout voir</option>
+                        {dataCategory.map((e)=>{
+                            return(<option>{e.name_category}</option>)
+                        })}
                     </select>
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="All">Toutes</option>
-                        <option value="Category A">Catégorie A</option>
-                        <option value="Category B">Catégorie B</option>
-                    </select>
-                    <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option value="All">Toutes</option>
-                        <option value="Category A">Catégorie A</option>
-                        <option value="Category B">Catégorie B</option>
+                        <option value="all">Tout voir</option>
+                        {dataPlace.map((e)=>{
+                            return(<option>{e.cardinal}</option>)
+                        })}
                     </select>
                 </div>
                 <Link to="/ajout-evenement">
                     <button type='submit' style={styles.button}>Add Event</button>
                 </Link>
             </div>
-            <div style={styles.hautpost}>
-                <h1 style={styles.title}>Titre de l'événement</h1>
-                <div style={styles.counter}>
-                    <button onClick={handleLikeClick} style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
+            {data.map((e)=>{
+                return(
+            <div className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>
+                <h1 className=' text-center text-xl' style={styles.title}>{e.name_event}</h1>
+                <div className='w-3/4 border-b border-black'></div>
+                <div className='w-4/5'>{e.description}</div>
+                <div className='' style={styles.counter}>
+                    <button onClick={handleLikeClick} className=' top-[20px]' style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
                     <span> {likeCount}</span>
                 </div>
             </div>
+        )})}
         </div>
     );
 }

@@ -54,6 +54,10 @@ const Signin = () => {
             width: '100px',
             marginBottom: '20px', // Espacement entre l'image et le formulaire
         },
+
+        create: {
+            color: '#81b71a',
+        },
     };
 
     return (
@@ -67,6 +71,10 @@ const Signin = () => {
                 <div>
                     <input type="password" name="password" placeholder='Password' style={styles.input} />
                 </div>
+                <p>Do not have an account yet ?</p>
+                <Link to="/inscription">
+                    <button type='submit' style={styles.create}>Create an account</button>
+                </Link>
                 <div>
                     <Link to="/home">
                         <button type='submit' style={styles.button}>Connexion</button>

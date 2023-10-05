@@ -132,7 +132,8 @@ const displayEvent = () => {
                     <button type='submit' style={styles.button}>Add Event</button>
                 </Link>
             </div>
-            {data.filter((e) => eventCategory === "all" || e.id_category.toString() === eventCategory && eventPlace === "all" || e.id_place.toString() === eventPlace)
+            {data.filter((e) => eventCategory === "all" || e.id_category.toString() === eventCategory)
+            .filter((e)=> eventPlace === "all" || e.id_place.toString() === eventPlace)
             .map((e)=>{
                 return(
             <div key={e.idevent} className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>

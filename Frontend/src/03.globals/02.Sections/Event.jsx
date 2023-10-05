@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import AddEvent from "../01.Pages/AddEvent";
 import axios from 'axios';
 
 const displayEvent = () => {
@@ -10,6 +9,7 @@ const displayEvent = () => {
         container: {
             marginTop: '70px',
             height: '100%',
+            width: '100%',
             backgroundColor: 'lightgray',
             padding: '20px',
             display: 'flex',
@@ -85,6 +85,8 @@ const displayEvent = () => {
     const [data, setData] = useState([])
     const [dataCategory, setDataCategory] = useState([])
     const [dataPlace, setDataPlace] = useState([])
+    const [eventCategory, setEventCategory] = useState('all')
+    const [eventPlace, setEventPlace] = useState('all')
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
@@ -100,8 +102,15 @@ const displayEvent = () => {
         .get(`http://localhost:3000/place`)
         .then((res) => {setDataPlace(res.data) })
     },[])
-    console.log(dataPlace);
     
+    const handleCategoryChange = (value) => {
+        setEventCategory(value);
+    }
+    const handlePlaceChange = (value) => {
+        setEventPlace(value);
+    }
+
+    console.log(eventPlace);
     return (
         <div style={styles.container}>
             <div style={styles.header}>
@@ -109,13 +118,13 @@ const displayEvent = () => {
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
                         <option value="all">Tout voir</option>
                         {dataCategory.map((e)=>{
-                            return(<option>{e.name_category}</option>)
+                            return(<option value={e.idcategory}>{e.name_category}</option>)
                         })}
                     </select>
-                    <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
+                    <select style={styles.select} onChange={(e) => handlePlaceChange(e.target.value)}>
                         <option value="all">Tout voir</option>
                         {dataPlace.map((e)=>{
-                            return(<option>{e.cardinal}</option>)
+                            return(<option value={e.idplace}>{e.cardinal}</option>)
                         })}
                     </select>
                 </div>
@@ -123,7 +132,8 @@ const displayEvent = () => {
                     <button type='submit' style={styles.button}>Add Event</button>
                 </Link>
             </div>
-            {data.map((e)=>{
+            {data.filter((e) => eventCategory === "all" || e.id_category.toString() === eventCategory && eventPlace === "all" || e.id_place.toString() === eventPlace)
+            .map((e)=>{
                 return(
             <div className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>
                 <h1 className=' text-center text-xl' style={styles.title}>{e.name_event}</h1>
@@ -132,6 +142,7 @@ const displayEvent = () => {
                 <div className='' style={styles.counter}>
                     <button onClick={handleLikeClick} className=' top-[20px]' style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
                     <span> {likeCount}</span>
+                    <p>{e.date}</p>
                 </div>
             </div>
         )})}

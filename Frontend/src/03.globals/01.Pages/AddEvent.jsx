@@ -11,7 +11,7 @@ const AddEvent = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         return axios 
-            .post('http://localhost:3000/events', { name, date, description, image })
+            .post('http://localhost:3000/event', { name, date, description, image })
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     };

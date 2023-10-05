@@ -8,6 +8,7 @@ const displayEvent = () => {
         container: {
             marginTop: '70px',
             height: '100%',
+            width: '100%',
             backgroundColor: 'lightgray',
             padding: '20px',
             display: 'flex',

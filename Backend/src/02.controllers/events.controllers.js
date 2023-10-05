@@ -6,7 +6,7 @@ const createOneEvent = async (req, res) => {
     
     try {
         const { name, date, description, image } = req.body;
-        await database.query('INSERT INTO event (name, date, description, image) VALUES (?, ?, ?, ?)', [name, date, description, image]);
+        await database.query('INSERT INTO event (name_event, date, description, image, id_user, id_category, id_place) VALUES (?, ?, ?, NULL, 1, 1, 1)', [name, date, description]);
         res.status(201).send("Event created");
     } catch (err) {
         console.error(err);
@@ -33,7 +33,7 @@ const updateOneEvent = (req, res) => {
     const { name, date, description, image } = req.body;
 
     database
-        .query('UPDATE event SET name = ?, date = ?, description = ?, image = ? WHERE eventId = ?', [name, date, description, image, eventId])
+        .query('UPDATE event SET name_event = ?, date = ?, description = ?, image = ? WHERE eventId = ?', [name, date, description, image, eventId])
         .then(() => res.send("Event updated"))
         .catch((err) => res.status(500).send("Error updating event", err))
     console.log(req.body)

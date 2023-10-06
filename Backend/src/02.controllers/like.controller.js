@@ -10,11 +10,12 @@ const getAllLike = (req, res) => {
 }
 
 const updateOneLike = (req, res) => {
-    const userId = Number(req.params.userId); 
-    const { pseudo, password} = req.body;
+    const idlike_iduser = Number(req.params.userId); 
+    const idlike_idevent = Number(req.params.eventId); 
+    const { pseudo} = req.body;
 
     database
-        .query('UPDATE like SET pseudo = ?, password = ?, name = ?, lastname = ? WHERE idlike_iduser = ?', [pseudo, password, userId]) 
+        .query('UPDATE like SET nb_like = ? lastname = ? WHERE idlike_iduser = ? , idlike_idevent = ?', [pseudo, password, idlike_iduser,idlike_idevent]) 
         .then(() =>{ res.send("User updated")})
         .catch((err) => {res.status(500).send("Error updating user", err)}) 
 }

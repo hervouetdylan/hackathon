@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from '../03.Components/Navbar';
-import { Link } from 'react-router-dom'; // Importez Link
+import { useNavigate } from 'react-router-dom'; // Importez Link
 
 const AddEvent = () => {
-    const [name, setName] = useState('');
-    const [responseMessage, setResponseMessage] = useState('');
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [date, setDate] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        return axios 
-            .post('http://localhost:3000/events', { name, date, description, image })
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-    };
-    
     
     const styles = {
         container: {
@@ -59,6 +46,22 @@ const AddEvent = () => {
         },
     };
     
+    const [name, setName] = useState('');
+    const [responseMessage, setResponseMessage] = useState('');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [date, setDate] = useState('');
+    const navigate = useNavigate();
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        return axios 
+            .post('http://localhost:3000/events', { name:name, date:date, description:description, image:image })
+            .then((res) => console.log(res), navigate("/home")) 
+            .catch((err) => console.log(err));
+    };
+    
     return (
       <div className="h-full w-full max-w-7xl p-6 flex flex-col gap-40">
         <Navbar style={{ marginBottom: '20%' }} /> 
@@ -81,7 +84,7 @@ const AddEvent = () => {
                             type="file"
                             onChange={(e) => setImage(e.target.files[0])}
                             style={styles.input}
-                            required
+                           
                         />
                     </div>
                     <div style={styles.inputRow}>
@@ -106,10 +109,10 @@ const AddEvent = () => {
                             required
                         />
                     </div>
-                    <button type="submit" style={styles.submitButton}><Link to="/home" style={styles.link}>Envoyer</Link></button>
+                    <button type="submit" onSubmit={handleSubmit} style={styles.submitButton}>envoie</button>
                      
                 </div>
-            </form>
+            </form> 
             
             {responseMessage && <p>{responseMessage}</p>} 
         </div>

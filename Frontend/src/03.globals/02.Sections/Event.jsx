@@ -86,7 +86,14 @@ const Event = () => {
 
     
     const [likeCount, setLikeCount] = useState(0);
-    
+    const [data, setData] = useState([])
+    const [dataCategory, setDataCategory] = useState([])
+    const [dataPlace, setDataPlace] = useState([])
+    const [eventCategory, setEventCategory] = useState('all')
+    const [eventPlace, setEventPlace] = useState('all')
+    const [filtre, setFiltre] = useState('')
+    const { userContext }= useContext(UserContext)
+   
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
@@ -119,30 +126,29 @@ const Event = () => {
                         <option value="Category A">Catégorie A</option>
                         <option value="Category B">Catégorie B</option>
                     </select>
+                    <input type="text"  onChange={(event) => setFiltre(event.target.value)}  />
                 </div>
                 <Link to="/ajout-evenement">
                     <button type='submit' style={styles.button}>Add Event</button>
                 </Link>
             </div>
-            <div style={styles.hautpost}>
-                <h1 style={styles.title}>Titre de l'événement</h1>
-                   <div>
-                    <ul>
-                            {events.map((event) => (
-                                <li key={event.id}>
-                                    <h2>{event.name}</h2>
-                                    <p>{event.date}</p>
-                                    <p>{event.description}</p>
-                                    <img src={event.image} alt="event" />
-                                </li>
-                            ))}
-                        </ul>
-                    </div> 
-                <div style={styles.counter}>
-                    <button onClick={handleLikeClick} style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
+            {data.filter((e) => eventCategory === "all" || e.id_category.toString() === eventCategory)
+            .filter((e)=> eventPlace === "all" || e.id_place.toString() === eventPlace)
+            .filter(e => filtre ? e.name_event.toLowerCase().includes(filtre.toLowerCase()) : true)
+            .map((e)=>{
+                return(
+            <div key={e.idevent} className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>
+                <h1 className=' text-center text-xl' style={styles.title}>{e.name_event}</h1>
+                <div className='w-3/4 border-b border-black'></div>
+                <div className='w-4/5'>{e.description}</div>
+                <div className='' style={styles.counter}>
+                    <button onClick={handleLikeClick} className=' top-[20px]' style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
                     <span> {likeCount}</span>
                 </div>
             </div>
+                )}
+                )  
+            }
         </div>
     );
 }

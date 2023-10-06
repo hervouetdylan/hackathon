@@ -34,7 +34,7 @@ const Navbar = () => {
         },
 
         connexion: {
-            backgroundColor: 'black',
+            backgroundColor: 'red',
             borderRadius: '15px',
             margin: '0 10px',
             color: 'white',
@@ -60,10 +60,7 @@ const Navbar = () => {
             </Link>
             <div style={styles.buttonContainer}>
                 <Link to="/connexion">
-                    <button style={styles.connexion}>Connexion</button>
-                </Link>
-                <Link to="/inscription">
-                    <button style={styles.inscription}>Inscription</button>
+                    <button style={styles.connexion}>Déconnexion</button>
                 </Link>
             </div>
         </div>

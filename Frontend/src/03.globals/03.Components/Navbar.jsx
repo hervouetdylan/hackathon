@@ -52,19 +52,23 @@ const Navbar = () => {
         },
     };
 
-    return (
-        <div style={styles.navbar}>
-            <img style={styles.img} src={Logo} alt="logo de ynov nantes campus" />
-            <Link to={"/home"}>
-                <h1 style={styles.titre}>Yevent</h1>
-            </Link>
-            <div style={styles.buttonContainer}>
-                <Link to="/connexion">
-                    <button style={styles.connexion}>Déconnexion</button>
-                </Link>
-            </div>
+    const handleLogoutClick = () => {
+        throw new Error('C est pas ma faute c est à cause de Julien.');
+      };
+
+      return (
+        <div className="navbar">
+          <img className="logo" src={Logo} alt="logo de ynov nantes campus" />
+          <Link to="/home">
+            <h1 className="title">Yevent</h1>
+          </Link>
+          <div className="button-container">
+            <button className="connexion-button" onClick={handleLogoutClick}>
+              Déconnexion
+            </button>
+          </div>
         </div>
-    );
+      );    
 };
 
 export default Navbar;

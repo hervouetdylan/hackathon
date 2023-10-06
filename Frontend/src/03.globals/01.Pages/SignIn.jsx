@@ -74,7 +74,6 @@ const Signin = () => {
         .then((res) => {
 
             setUserContext(res.data[0])
-            console.log(userContext);
             navigate("/home");
         })
         .catch((err) => {

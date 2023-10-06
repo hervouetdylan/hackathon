@@ -6,7 +6,7 @@ const createOneEvent = async (req, res) => {
     
     try {
         const { name, date, description, image } = req.body;
-        await database.query('INSERT INTO event (name_event, date, description, image, id_user, id_category, id_place) VALUES (?, ?, ?, NULL, 1, 1, 1)', [name, date, description]);
+        await database.query('INSERT INTO event (name_event, date, description, image, id_user, id_category, id_place) VALUES (?, ?, ?, NULL, 1, 1, 1)', [name, date, description, image]);
         res.status(201).send("Event created");
     } catch (err) {
         console.error(err);

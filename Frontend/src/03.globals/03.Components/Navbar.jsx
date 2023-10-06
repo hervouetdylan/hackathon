@@ -53,7 +53,7 @@ const Navbar = () => {
     };
 
     const handleLogoutClick = () => {
-        throw new Error('C est pas ma faute c est à cause de Julien.');
+        throw new Error('C est pas ma faute c est à cause de Julien. Perdu Dylan, vue');
       };
 
       return (

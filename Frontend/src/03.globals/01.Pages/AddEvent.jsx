@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'; // Importez Link
 
 const AddEvent = () => {
     const [name, setName] = useState('');
-    const [responseMessage, setResponseMessage] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [date, setDate] = useState('');
@@ -110,8 +109,6 @@ const AddEvent = () => {
                      
                 </div>
             </form>
-            
-            {responseMessage && <p>{responseMessage}</p>} 
         </div>
       </div>
     );

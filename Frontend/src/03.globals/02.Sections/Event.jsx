@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import UserContext from "../04.Context/UserContext";
-
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import AddEvent from "../01.Pages/AddEvent";
 import axios from 'axios';
-
-const displayEvent = () => {
+const Event = () => {
     const styles = {
         container: {
             marginTop: '70px',
-            height: '100%',
-            width: '100%',
+            height: '100vh',
             backgroundColor: 'lightgray',
             padding: '20px',
             display: 'flex',
@@ -56,105 +53,98 @@ const displayEvent = () => {
             marginRight: '20px',
         },
 
-        // hautpost: {
-        //     backgroundColor: 'white',
-        //     marginTop: '100px',
-        //     height: '300px',
-        //     width: '700px',
-        //     display: 'flex',
-        //     flexDirection: 'column', // Afficher le contenu en colonne
-        //     justifyContent: 'space-between', // Espacement vertical entre les éléments
-        //     alignItems: 'flex-start', // Aligner à gauche
-        //     padding: '20px', // Ajouter un espace intérieur
-        //     position: 'relative', // Permet de positionner le bouton Like
-        // },
+        hautpost: {
+            backgroundColor: 'white',
+            marginTop: '100px',
+            height: '300px',
+            width: '700px',
+            display: 'flex',
+            flexDirection: 'column', // Afficher le contenu en colonne
+            justifyContent: 'space-between', // Espacement vertical entre les éléments
+            alignItems: 'flex-start', // Aligner à gauche
+            padding: '20px', // Ajouter un espace intérieur
+            position: 'relative', // Permet de positionner le bouton Like
+        },
 
-        // title: {
-        //     fontSize: '24px',
-        //     marginBottom: '20px', // Espacement entre le titre et le bouton Like
-        // },
+        title: {
+            fontSize: '24px',
+            marginBottom: '20px', // Espacement entre le titre et le bouton Like
+        },
 
-        // likeButton: {
-        //     position: 'absolute',
-        //     top: '20px', // Position en haut
-        //     right: '20px', // Position à droite
-        // },
+        likeButton: {
+            position: 'absolute',
+            top: '20px', // Position en haut
+            right: '20px', // Position à droite
+        },
 
-     
+        counter: {
+            display: 'flex',
+            alignItems: 'center',
+        },
     };
     const [events, setEvents] = useState([]);
 
     
     const [likeCount, setLikeCount] = useState(0);
-    const [data, setData] = useState([])
-    const [dataCategory, setDataCategory] = useState([])
-    const [dataPlace, setDataPlace] = useState([])
-    const [eventCategory, setEventCategory] = useState('all')
-    const [eventPlace, setEventPlace] = useState('all')
-    const { userContext }= useContext(UserContext)
-    console.log(userContext);
+    
     const handleLikeClick = () => {
         setLikeCount(likeCount + 1);
     };
-   
-    useEffect (()=>{
-        axios
-        .get(`http://localhost:3000/events`)
-        .then((res) => {setData(res.data) })
-        axios
-        .get(`http://localhost:3000/category`)
-        .then((res) => {setDataCategory(res.data) })
-        axios
-        .get(`http://localhost:3000/place`)
-        .then((res) => {setDataPlace(res.data) })
-    },[])
-    
-    const handleCategoryChange = (value) => {
-        setEventCategory(value);
-    }
-    const handlePlaceChange = (value) => {
-        setEventPlace(value);
-    }
+    useEffect(() => {
+        // We retrieve the list of cards from the api
+        axios.get('http://localhost:3000/events')
+            .then((response) => {
+                setEvents(response.data) // update data in the state
+            })
+            .catch((err) => console.log(err))
 
-   
+    }, []);
+
     return (
         <div style={styles.container}>
             <div style={styles.header}>
                 <div style={styles.filters}>
                     <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
-                        <option className='text-center' value="all">All</option>
-                        {dataCategory.map((e)=>{
-                            return(<option className='text-center' key={e.idcategory} value={e.idcategory}>{e.name_category}</option>)
-                        })}
+                        <option value="All">Toutes</option>
+                        <option value="Category A">Catégorie A</option>
+                        <option value="Category B">Catégorie B</option>
                     </select>
-                    <select style={styles.select} onChange={(e) => handlePlaceChange(e.target.value)}>
-                        <option className='text-center' value="all">All</option>
-                        {dataPlace.map((e)=>{
-                            return(<option className='text-center' key={e.idplace} value={e.idplace}>{e.cardinal}</option>)
-                        })}
+                    <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
+                        <option value="All">Toutes</option>
+                        <option value="Category A">Catégorie A</option>
+                        <option value="Category B">Catégorie B</option>
+                    </select>
+                    <select style={styles.select} onChange={(e) => handleCategoryChange(e.target.value)}>
+                        <option value="All">Toutes</option>
+                        <option value="Category A">Catégorie A</option>
+                        <option value="Category B">Catégorie B</option>
                     </select>
                 </div>
                 <Link to="/ajout-evenement">
                     <button type='submit' style={styles.button}>Add Event</button>
                 </Link>
             </div>
-            {data.filter((e) => eventCategory === "all" || e.id_category.toString() === eventCategory)
-            .filter((e)=> eventPlace === "all" || e.id_place.toString() === eventPlace)
-            .map((e)=>{
-                return(
-            <div key={e.idevent} className=' flex items-center gap-3 flex-col bg-white w-1/2  border-solid  rounded-lg  mb-5 shadow-sm shadow-slate-700 ' style={styles.hautpost}>
-                <h1 className=' text-center text-xl' style={styles.title}>{e.name_event}</h1>
-                <div className='w-3/4 border-b border-black'></div>
-                <div className='w-4/5'>{e.description}</div>
-                <div className='' style={styles.counter}>
-                    <button onClick={handleLikeClick} className=' top-[20px]' style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
+            <div style={styles.hautpost}>
+                <h1 style={styles.title}>Titre de l'événement</h1>
+                   <div>
+                    <ul>
+                            {events.map((event) => (
+                                <li key={event.id}>
+                                    <h2>{event.name}</h2>
+                                    <p>{event.date}</p>
+                                    <p>{event.description}</p>
+                                    <img src={event.image} alt="event" />
+                                </li>
+                            ))}
+                        </ul>
+                    </div> 
+                <div style={styles.counter}>
+                    <button onClick={handleLikeClick} style={styles.likeButton}><FontAwesomeIcon icon={faThumbsUp} /></button>
                     <span> {likeCount}</span>
-                    <p>{e.date}</p>
                 </div>
             </div>
-        )})}
         </div>
     );
 }
 
-export default displayEvent;
+export default Event;

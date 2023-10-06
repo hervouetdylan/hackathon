@@ -115,9 +115,7 @@ const Register = () => {
                     {errorMdp ? "" : <label className='text-red-700' htmlFor="">Error password</label>}
                 </div>
                 <div style={styles.buttonContainer}>
-                    
                         <button type='submit' onSubmit={handleSubmit} style={styles.button}>Inscription</button>
-                    
                 </div>
             </form>
         </div>
